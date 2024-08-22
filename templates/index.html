@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ block.super }}: Welcome
+{% endblock %}
+{% block content %}
+    <h2>Welcome to the reading club!</h2>
+    <p>We love Spanish literature</p>
+    <a href="{% url 'register' %}">
+        <button>Click here to join!</button>
+    </a>
+
+    {% if records %}
+        <p>Current club participants:</p>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Favorite book</th>
+            </tr>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.get_name }}</td>
+                    <td>{{ record.get_age }}</td>
+                    <td>{{ record.get_book }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No participants so far. Be the first!</p>
+    {% endif %}
+{% endblock %}
